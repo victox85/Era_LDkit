@@ -11,3 +11,12 @@ Se implementaron ejemplos de LDkit para:
 - Realizar consultas dinámicas y obtener resultados desde el endpoint SPARQL de ERA.
 
 En este proyecto **no se realizaron modificaciones ni inserciones** de datos debido a la restricción, solo se replicaron ejemplos de consulta y visualización para comprobar el funcionamiento de LDkit con los datos de ERA.
+
+---
+
+## Instalación de LDkit
+
+Para instalar LDkit en tu proyecto:
+
+```bash
+npm install ldkit
