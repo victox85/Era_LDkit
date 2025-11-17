@@ -12,4 +12,8 @@ Este proyecto es una **página web simple desarrollada en React** que interactú
   - Ejecuta consultas manuales para obtener exactamente la información que se desea mostrar.
 
 Este proyecto sirve como demostración de cómo combinar **React**, **LDkit** y **datos abiertos europeos** para explorar y consultar knowledge graphs de manera interactiva.
+## Instalación de react
+Para que funcione se necesita:
 
+```bash
+npm install react-router-dom
