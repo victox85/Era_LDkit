@@ -1,16 +1,8 @@
-import jsonld from "jsonld";
 import { getIriLabel } from "../utils/countryMap";
 import { getCountryName } from "../utils/countryMap";
 // Tipo mínimo de un frame JSON-LD
 export type JsonLdFrame = Record<string, any>;
 
-export async function compactWithContext(json: any, context: any) {
-  return jsonld.compact(json, context);
-}
-
-export async function frameResource(json: any, frame: JsonLdFrame) {
-  return jsonld.frame(json, frame);
-}
 
 
 
