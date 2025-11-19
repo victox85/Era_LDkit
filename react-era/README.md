@@ -21,7 +21,7 @@ npm install react-router-dom
 
 ### Menú principal
 Es un menu simple en donde he colocado los enlaces para visionar diferentes schemas y un sandbox que después explicaré
-![Sandbox](screenshoots/menu.png)
+![menu](screenshoots/menu.png)
 ### Tunnel
 Este sería como sería uno de ellos se ha usado los filtros limitados que ofrecen LDkit, y permite ordenacion tanto de los numeros como las letras y filtrado por string o números.
 ![Tunnel](screenshoots/Tunnel.png)
