@@ -10,15 +10,17 @@ export default function TrackList() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log(Tracks.find());
     Tracks.find().then(data => {
       const mapped = data.map(t => {
         const n = normalizeSchemaData(t);
-
+        
         return {
           name: n.label,
           gauge: n.wheelSetGauge,
           profile: n.gaugingProfile,
           speed: n.maximumPermittedSpeed,
+          country: n.trackOfSection?.inCountry || "N/A",
         };
       });
 
@@ -37,8 +39,10 @@ export default function TrackList() {
         columns={[
           { key: "name", label: "Nombre" },
           { key: "gauge", label: "Gauge" },
+          { key: "Country", label: "Pais" },
           { key: "profile", label: "Gauging" },
           { key: "speed", label: "Velocidad máx." },
+          
         ]}
         data={rows}
       />

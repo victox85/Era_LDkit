@@ -18,6 +18,8 @@ export default function ContactLineList() {
           name: n.label,
           type: n.contactLineSystemType,
           energy: n.energySupplySystem,
+            maxCurrentStandstillPantograph: n.maxCurrentStandstillPantograph,
+            minimumContactWireHeight: n.minimumContactWireHeight,
         };
       });
 
@@ -37,6 +39,7 @@ export default function ContactLineList() {
           { key: "name", label: "Nombre" },
           { key: "type", label: "Tipo" },
           { key: "energy", label: "Energía" },
+          { key: "maxCurrentStandstillPantograph", label: "maxCurrent Standstill Pantograph" },
         ]}
         data={rows}
       />

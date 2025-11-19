@@ -13,6 +13,8 @@ export type Tunnel = {
   label: string;
   inCountry: string;
   length: number;    // número, no string
+  hasEmergencyPlan: boolean;
+  dieselThermalAllowed: boolean;
 };
 
 export type Track = {
@@ -22,6 +24,7 @@ export type Track = {
   gaugingProfile?: string;
   railInclination?: number;
   maximumPermittedSpeed?: number;
+    inCountry: string;
 };
 
 export type InfrastructureElement = {
@@ -37,6 +40,8 @@ export type ContactLineSystem = {
   contactLineSystemType?: string;
   energySupplySystem?: string;
   maximumTrainCurrent?: number;
+    maxCurrentStandstillPantograph: number,
+  minimumContactWireHeight: number,
 };
 
 export type SectionOfLine = {
@@ -56,14 +61,16 @@ export const TunnelSchema = {
     "@id": era.lengthOfTunnel,
     "@type": xsd.decimal,
   },
+  hasEmergencyPlan: era.hasEmergencyPlan,
+  dieselThermalAllowed: era.dieselThermalAllowed,
 } as const;
 export const TrackSchema = {
   "@type": era.Track,
   label: rdfs.label,
   wheelSetGauge: { "@id": era.wheelSetGauge, "@type": xsd.decimal },
   gaugingProfile: { "@id": era.gaugingProfile },
-  railInclination: { "@id": era.railInclination, "@type": xsd.decimal },
-  maximumPermittedSpeed: { "@id": era.maximumPermittedSpeed, "@type": xsd.decimal },
+  maximumPermittedSpeed: { "@id": era.maximumPermittedSpeed},
+  
 } as const;
 
 
@@ -81,8 +88,11 @@ export const InfrastructureElementSchema = {
 export const ContactLineSystemSchema = {
   "@type": era.ContactLineSystem,
   label: rdfs.label,
+    maxCurrentStandstillPantograph: { "@id":  era.maxCurrentStandstillPantograph, "@type": xsd.decimal },
   contactLineSystemType: { "@id": era.contactLineSystemType },
   energySupplySystem: { "@id": era.energySupplySystem },
+
+
 } as const;
 
 export const SectionOfLineSchema = {

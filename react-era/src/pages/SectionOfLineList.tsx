@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { SectionOfLines } from "../ld/lenses";
-import type { SectionOfLine } from "../ld/lenses";
 import {normalizeSchemaData} from "../ld/ldutils"
 import DataTable from "../components/DataTable";
 import { getCountryName } from "../utils/countryMap";

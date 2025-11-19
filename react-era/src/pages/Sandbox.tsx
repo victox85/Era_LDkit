@@ -6,7 +6,13 @@ import { ldOptions } from "../ld/ldkit";
 import {  rdfs } from "ldkit/namespaces";
 import { era } from "../ld/namespaces";
 import { ldkit } from "ldkit/namespaces";
-
+function splitIntoColumns<T>(array: T[], columns: number): T[][] {
+  const result: T[][] = Array.from({ length: columns }, () => []);
+  array.forEach((item, index) => {
+    result[index % columns].push(item);
+  });
+  return result;
+}
 export default function Sandbox() {
   const [loadingProps, setLoadingProps] = useState(true);
   const [props, setProps] = useState<string[]>([]);
@@ -15,7 +21,7 @@ export default function Sandbox() {
   const [results, setResults] = useState<any[]>([]);
   const [running, setRunning] = useState(false);
 
-  // 1️⃣ Obtener propiedades dinámicas
+
   useEffect(() => {
     async function fetchProps() {
       const endpoint = "https://data-interop.era.europa.eu/api/sparql";
@@ -43,17 +49,17 @@ export default function Sandbox() {
     fetchProps();
   }, []);
 
-  // 2️⃣ Crear schema dinámico
+
   const dynSchema = createDynamicSchema(selectedProps);
   const DynamicTunnel = createLens(dynSchema, ldOptions);
 
-  // 3️⃣ Eval seguro del CONSTRUCT
+
   function evalConstruct(code: string) {
   const func = new Function("CONSTRUCT", "era", "rdfs", "ldkit", `return ${code}`);
   return func(CONSTRUCT, era, rdfs, ldkit);
   }
 
-  // 4️⃣ Ejecutar query
+
   async function runQuery() {
     setRunning(true);
     setResults([]);
@@ -61,11 +67,11 @@ export default function Sandbox() {
     try {
       let r;
       if (queryText && queryText.trim() !== "") {
-        // Ejecuta el CONSTRUCT pegado en textarea
+
         const query = evalConstruct(queryText);
         r = await DynamicTunnel.query(query);
       } else {
-        // Si no hay CONSTRUCT, usa find()
+
         r = await DynamicTunnel.find();
       }
       setResults(r);
@@ -77,6 +83,8 @@ export default function Sandbox() {
     setRunning(false);
   }
 
+  const columns = splitIntoColumns(props, 2);
+
   return (
     <div className="p-6">
       <h1 className="text-3xl mb-4">Sandbox dinámico de Tunnel</h1>
@@ -85,31 +93,32 @@ export default function Sandbox() {
 
       {!loadingProps && (
         <div className="grid grid-cols-3 gap-4">
-          {/* Columna de selección de propiedades */}
-          <div className="col-span-1 border p-4">
-            <h2 className="text-xl mb-2 font-bold">Propiedades disponibles</h2>
-            <div className="h-96 overflow-auto space-y-1">
-              {props.map((p) => (
-                <label key={p} className="block">
-                  <input
-                    type="checkbox"
-                    className="mr-2"
-                    checked={selectedProps.includes(p)}
-                    onChange={() => {
-                      setSelectedProps((s) =>
-                        s.includes(p)
-                          ? s.filter((x) => x !== p)
-                          : [...s, p]
-                      );
-                    }}
-                  />
-                  {p}
-                </label>
+          {/* Columna de selección de propiedades en varias columnas visuales */}
+          <div className="col-span-1 border p-4 h-[85vh] overflow-auto">
+            <h2 className="text-xl mb-4 font-bold">Propiedades disponibles</h2>
+            <div className="flex gap-4">
+              {columns.map((colProps, colIndex) => (
+                <div key={colIndex} className="flex-1 space-y-1">
+                  {colProps.map((p) => (
+                    <label key={p} className="block">
+                      <input
+                        type="checkbox"
+                        className="mr-2"
+                        checked={selectedProps.includes(p)}
+                        onChange={() =>
+                          setSelectedProps((s) =>
+                            s.includes(p) ? s.filter((x) => x !== p) : [...s, p]
+                          )
+                        }
+                      />
+                      {p}
+                    </label>
+                  ))}
+                </div>
               ))}
             </div>
           </div>
 
-          {/* Columna de CONSTRUCT y resultados */}
           <div className="col-span-2 border p-4">
             <h2 className="text-xl mb-2 font-bold">
               SPARQL CONSTRUCT (opcional)
