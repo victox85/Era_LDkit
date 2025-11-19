@@ -19,20 +19,20 @@ Para que funcione se necesita:
 npm install react-router-dom
 ```
 
-### Menú principal
+## Menú principal
 Es un menu simple en donde he colocado los enlaces para visionar diferentes schemas y un sandbox que después explicaré
 ![menu](screenshoots/menu.png)
 
 
 
 
-### Tunnel
+## Tunnel
 Este sería como sería uno de ellos se ha usado los filtros limitados que ofrecen LDkit, y permite ordenacion tanto de los numeros como las letras y filtrado por string o números.
 ![Tunnel](screenshoots/Tunnel.png)
 
 
 
-### Sandbox
+## Sandbox
 Este un mini Sandbox sobre la clase de Tunel, primero obtengo todas las propiedades en dominio de tunnel, haciendo uso de un select, el usuario indica que propiedades le intera mostrar, las que se selecciona mostrará como se coloca en el schema que usará LDkit, y por último de forma opcional se puede poner código sparql para activar como filtro a lo obtenido del schema debido a que LDkit ofrece de forma muy limitada opciones,Ejemplo:
 ```bash
 CONSTRUCT`
