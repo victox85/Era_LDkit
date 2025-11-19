@@ -17,7 +17,7 @@ Para que funcione se necesita:
 
 ```bash
 npm install react-router-dom
-
+```
 
 ### Menú principal
 https://raw.githubusercontent.com/victox85/Era_LDkit/main/screenshoots/menu.png
